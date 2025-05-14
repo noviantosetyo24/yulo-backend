@@ -18,6 +18,7 @@ class Input extends Component
     public $rowclass;
     public $wiremodel;
     public $accept;
+    public $attr;
     
     public function __construct(
         $label,
@@ -26,7 +27,7 @@ class Input extends Component
         $rowclass = '',
         $class = '',
         $wiremodel = '',
-        $accept = '',
+        $attr = [],
     ) {
         $this->label = $label;
         $this->name = $name;
@@ -34,7 +35,7 @@ class Input extends Component
         $this->rowclass = $rowclass;
         $this->class = $class;
         $this->wiremodel = $wiremodel;
-        $this->accept = $accept;
+        $this->attr = $attr;
     }
 
     /**

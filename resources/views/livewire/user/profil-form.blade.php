@@ -1,13 +1,17 @@
 <form wire:submit.prevent="simpan">
     <div class="row mb-5 justify-content-center">
         <div class="col-md-6 text-center">
+            @if ($avatar)
+            <img src="{{ $avatar->temporaryUrl() }}" class="rounded-circle" alt="Avatar" width="100" height="100">
+            @else
             <img src="{{ asset_img($avatarPath) }}" class="rounded-circle" alt="Avatar" width="100" height="100">
+            @endif
         </div>
     </div>
 
     <x-input rowclass="6" label="Nama" type="text" wiremodel="name" wire:keydown="onUpdate"></x-input>
     <x-input rowclass="6" label="Email" type="email" wiremodel="email" wire:keydown="onUpdate"></x-input>
-    <x-input rowclass="6" label="Ubah Foto Profil" type="file" wiremodel="avatar" wire:keydown="onUpdate" accept=".png,.jpg,.jpeg"></x-input>
+    <x-input rowclass="6" label="Ubah Foto Profil" type="file" wiremodel="avatar" wire:keydown="onUpdate" :attr="['accept' => '.png,.jpg,.jpeg']"></x-input>
 
     @error('email') <x-alert rowclass="6" class="danger" :message="$message"></x-alert> @enderror
     @error('avatar') <x-alert rowclass="6" class="danger" :message="$message"></x-alert> @enderror

@@ -20,17 +20,24 @@ class RegisterForm extends Component
     protected $messages = [
         'name' => 'Nama tidak boleh kosong',
         'email' => 'Email tidak valid',
+        'email.unique' => 'Email sudah terdaftar',
         'password' => 'Password minimal :min Karakter',
         'password.confirmed' => 'Konfirmasi Password tidak sesuai',
     ];
 
-    public function getAllProperties()
-    {
-        return collect(get_object_vars($this));
-    }
-
     public function register()
     {
+        $validate = $this->validate();
+        $validate['email_verified_at'] = now();
+        (new \App\Http\Controllers\Auth\RegisterController)->create($validate);
+        return redirect()->route('login');
+    }
+
+    public function create()
+    {
+        $this->rules['password'] = 'required|min:6';
+        unset($this->messages['password.confirmed']);
+
         $validate = $this->validate();
         (new \App\Http\Controllers\Auth\RegisterController)->create($validate);
         return redirect()->route('login');

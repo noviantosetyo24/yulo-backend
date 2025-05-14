@@ -71,4 +71,26 @@ class EditController extends Controller
         }
         return back()->with(['message' => 'Berhasil update password']);
     }
+
+    public function verify(Request $request) 
+    {
+        $rules = [
+            'password' => 'required|min:6|confirmed',
+        ];
+        $messages = [
+            'password' => 'Password minimal 6 Karakter',
+            'password.confirmed' => 'Konfirmasi Password tidak sesuai',
+        ];
+        $request->validate($rules, $messages);
+
+        try {
+            $user = User::find(auth()->user()->id);
+            $user->password = Hash::make($request->password);
+            $user->email_verified_at = now();
+            $user->save();
+        } catch (\Throwable $th) {
+            return back()->withErrors(['form' => $th->getMessage()]);
+        }
+        return redirect()->route('home');
+    }
 }

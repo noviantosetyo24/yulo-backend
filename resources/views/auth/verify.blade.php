@@ -5,21 +5,19 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
+                <div class="card-header">{{ __('Verifikasi Akun Anda') }}</div>
                 <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    <x-form method="POST" action="{{ route('user.verify') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
+                        <x-input rowclass="6" label="Password Baru" type="password" name="password" wire:keydown="onUpdate"></x-input>
+                        <x-input rowclass="6" label="Konfirmasi Password Baru" type="password" name="password_confirmation" wire:keydown="onUpdate"></x-input>
+
+                        @error('email') <x-alert rowclass="6" class="danger" :message="$message"></x-alert> @enderror
+                        @error('password') <x-alert rowclass="6" class="danger" :message="$message"></x-alert> @enderror
+                        @error('form') <x-alert rowclass="6" class="danger" :message="$message"></x-alert> @enderror
+
+                        <x-button rowclass="6" type="submit" class="primary" label="Simpan"></x-button>
+                    </x-form>
                 </div>
             </div>
         </div>

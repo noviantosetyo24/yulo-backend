@@ -15,17 +15,20 @@ class Button extends Component
     public $class;
     public $rowclass;
     public $label;
+    public $attr;
 
     public function __construct(
         $type = 'button',
         $label = 'Submit',
         $class = 'success',
         $rowclass = '',
+        $attr = [],
     ) {
         $this->type = $type;
         $this->label = $label;
         $this->class = $class;
         $this->rowclass = $rowclass;
+        $this->attr = $attr;
     }
 
     /**

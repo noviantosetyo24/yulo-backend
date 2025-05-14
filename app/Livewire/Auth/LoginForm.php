@@ -24,6 +24,9 @@ class LoginForm extends Component
     {
         $this->validate();
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
+            if (empty(auth()->user()->email_verified_at)) {
+                return redirect()->route('home');
+            }
             return redirect()->route('home');
         }
         $this->addError('form', 'Email atau password tidak sesuai');

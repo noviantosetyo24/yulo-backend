@@ -4,7 +4,11 @@
 @endif
 
 <div class="form-group">
-    <button type="{{ $type ?? 'button' }}" class="btn btn-{{ $class ?? 'success' }}">{{ $label }}</button>
+    <button type="{{ $type ?? 'button' }}" class="btn btn-{{ $class ?? 'success' }}"
+        @foreach ($attr as $key => $item)
+        {!! $key !!}="{{ $item }}"
+        @endforeach
+    >{{ $label }}</button>
     {{ $slot }}
 </div>
 

@@ -11,4 +11,9 @@ class ViewController extends Controller
     {
         return view('user.list');
     }
+    
+    public function create()
+    {
+        return view('user.create');
+    }
 }
