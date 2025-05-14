@@ -5,7 +5,7 @@
 
 <div class="form-group">
     <label>{{ $label  }}</label>
-    <input type="{{ $type }}" name="{{ $name }}" class="form-control {{ $class }}" wire:model="{{ $wiremodel }}"
+    <input type="{{ $type }}" name="{{ $name }}" class="form-control {{ $class }}" wire:model="{{ $wiremodel }}" value="{{ $value }}"
         @foreach ($attr as $key => $item)
         {!! $key !!}="{{ $item }}"
         @endforeach

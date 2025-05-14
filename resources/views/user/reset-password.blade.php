@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('user.password.update') }}">
                         @csrf
 
-                        <x-input rowclass="6" label="Email" type="email" name="email"></x-input>
+                        <x-input rowclass="6" label="Email" type="email" name="email" :attr="['readonly' => 'true']" :value="$email"></x-input>
                         <x-input rowclass="6" label="Password Lama" type="password" name="password_old"></x-input>
                         <x-input rowclass="6" label="Password" type="password" name="password"></x-input>
                         <x-input rowclass="6" label="Konfirmasi Password" type="password" name="password_confirmation"></x-input>
